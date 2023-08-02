@@ -2,9 +2,9 @@
 
 <details>
 
-<summary>C basic</summary>
+<summary>1. C basic</summary>
 
-### Data Type
+### 1.1 Data Type
 - Some common data types(in library **stdint.h**):
 
 	| Data Type  | Size (bytes) | Range | 
@@ -18,7 +18,7 @@
     |int64_t |8 bytes |-9223372036854775808 to 9223372036854775807|
     |uint64_t|8 bytes |0 to 18446744073709551615|
 
-### Typedef
+### 1.2 Typedef
 - Typedef được sử dụng để đặt tên mới cho kiểu dữ liệu.
 #### Example:
 ```c
@@ -31,7 +31,7 @@ int main()
     return 0;
 }
 ```
-### C Control Statements
+### 1.3 C Control Statements
 - C if...else Statement
 - Switch Statement in C
 - C for Loop
