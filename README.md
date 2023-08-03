@@ -37,7 +37,10 @@ int main()
 - C for Loop
 - While and do...while loop in C
 - Switch case (combine Enum)
-    #### Example:
+
+  <details>
+	<summary>Example</summary>
+
     ```c
     #include <stdio.h>
     typedef enum{
