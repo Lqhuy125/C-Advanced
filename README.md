@@ -1,10 +1,12 @@
 ## PROGRAMMING C
 
 <details>
+<summary><h3>0. C basic<h3></summary>
+ <ul>
+ <details>
+	 
+<summary><h4> 0.1 Data Type <h4></summary>
 
-<summary>1. C basic</summary>
-
-### 1.1 Data Type
 - Some common data types(in library **stdint.h**):
 
 	| Data Type  | Size (bytes) | Range | 
@@ -17,8 +19,11 @@
     |uint32_t|4 bytes |0 to 4294967295|
     |int64_t |8 bytes |-9223372036854775808 to 9223372036854775807|
     |uint64_t|8 bytes |0 to 18446744073709551615|
+  
+</details>
+<details>
+<summary><h4> 0.2 Typedef <h4></summary>
 
-### 1.2 Typedef
 - Typedef được sử dụng để đặt tên mới cho kiểu dữ liệu.
 #### Example:
 ```c
@@ -31,13 +36,20 @@ int main()
     return 0;
 }
 ```
-### 1.3 C Control Statements
+</details>
+
+<details>
+<summary><h4> 0.3 C Control Statements <h4></summary>
+
 - C if...else Statement
 - Switch Statement in C
 - C for Loop
 - While and do...while loop in C
 - Switch case (combine Enum)
-    #### Example:
+
+  <details>
+	<summary>Example</summary>
+
     ```c
     #include <stdio.h>
     typedef enum{
@@ -70,4 +82,38 @@ int main()
     ```
 - Continue
 - Break
-###
+  </details>
+</details>
+
+<details>
+<summary><h3>1. Compiler<h3></summary>
+ <ul>
+	 
+  **Quá trình biên dịch:**
+  
+![alt text](https://media.geeksforgeeks.org/wp-content/uploads/20230404112946/Compilation-Process-in-C.png)
+ 	
+   Bắt đầu từ file ` *.c/ *.h ` ( được gọi là ***Source file***). Ex: main.c
+   
+   Sau khi qua quá trình tiền xử lý(***Preprocessor***), file ` *.c/ *.h ` chuyển thành file ` *.i ` ( được gọi là ***Preprocessed Sources***). Ex: main.i
+   ```c
+gcc -E main.c -o main.i
+ ```
+   Sau đó chuyển sang quá trình ***Compiler*** sẽ biến file `*.i` thành file `*.s` ( được gọi là ***Assemply Code*** ). Ex: main.s
+   ```c
+gcc main.i -S -o main.s
+ ```
+   Tiếp đến là quá trình ***Assembler*** sẽ biến file `*.s` thành file `*.o` (được gọi là ***Object files***). Ex. main.o
+   ```c
+gcc -c main.s -o main.o
+ ```
+   
+   Cuối cùng là quá trình ***Linker*** sẽ kết hợp file `*.o` và các Libraries lại với nhau tạo thành file `*.exe` (được gọi là ***Executable***). Ex. main.exe
+   ```c
+gcc main.o -o main
+ ```
+How to run file `main.exe` using cmd: ` ./main.exe ` or ` ./main `
+</details>
+
+ 
+
