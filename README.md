@@ -87,27 +87,32 @@ int main()
 
 <details>
 <summary><h3>1. Compiler<h3></summary>
-
+ <ul>
+	 
   **Quá trình biên dịch:**
-
+  
+![alt text](https://media.geeksforgeeks.org/wp-content/uploads/20230404112946/Compilation-Process-in-C.png)
+ 	
    Bắt đầu từ file ` *.c/ *.h ` ( được gọi là ***Source file***). Ex: main.c
    
    Sau khi qua quá trình tiền xử lý(***Preprocessor***), file ` *.c/ *.h ` chuyển thành file ` *.i ` ( được gọi là ***Preprocessed Sources***). Ex: main.i
-   
+   ```c
+gcc -E main.c -o main.i
+ ```
    Sau đó chuyển sang quá trình ***Compiler*** sẽ biến file `*.i` thành file `*.s` ( được gọi là ***Assemply Code*** ). Ex: main.s
-   
+   ```c
+gcc main.i -S -o main.s
+ ```
    Tiếp đến là quá trình ***Assembler*** sẽ biến file `*.s` thành file `*.o` (được gọi là ***Object files***). Ex. main.o
+   ```c
+gcc -c main.s -o main.o
+ ```
    
    Cuối cùng là quá trình ***Linker*** sẽ kết hợp file `*.o` và các Libraries lại với nhau tạo thành file `*.exe` (được gọi là ***Executable***). Ex. main.exe
-   
-**Note:**
-
-* Trong quá trình ***Preprocessor*** để chuyển sang file `*.i`:
-   - Những thư viện/ source con ` #include <*.c/ *.h>` sẽ được thay thế bằng các đoạn code đó vào file ` main `.
-   - Các biến được sử dụng `#define` sẽ được thay vào đúng vị trí được sử dụng.
-   - Các `Comment` sẽ được loại bỏ
-   
- 
+   ```c
+gcc main.o -o main
+ ```
+How to run file `main.exe` using cmd: ` ./main.exe ` or ` ./main `
 </details>
 
  
