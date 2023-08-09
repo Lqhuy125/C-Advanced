@@ -181,17 +181,64 @@ int int__var1; double double__var1; char char__var1;
 <details>
 <summary><h4> 2.1.4 Variadic in C <h4></summary>
 Reference Documents: https://www.geeksforgeeks.org/variadic-functions-in-c/	
+
+**Example:**
+```c
+#define VAR(...) __VAR_ARGS__
+int main(){
+	VAR(hello world)
+	VAR(int a, int b, int c);
+}
+```
+Output:
+``` 
+hello world
+int a, int b, int c;
+```
+
 </details>
 </details>	
 
 <details>	
-<summary><h4> 2.2 #ifndef ... #else... #endif <h4></summary>
+<summary><h4> 2.2 #ifndef ... #endif <h4></summary>
+ifndef: if not define
+	
+Thường được sử dụng để tránh việc define một tên nhiều lần
 
+**Example:**
+```c
+#ifndef SIZE
+/* 
+    Neu SIZE chua duoc dinh nghia thi doan nay se duoc su dung 
+ */
+#define SIZE 5  
+
+#endif
+```
 </details>
 
 <details>
-<summary><h4> 2.3 #ifndef ... #else... #endif <h4></summary>
+<summary><h4> 2.3 #if ... #elif... #else... #endif <h4></summary>
 
+**Example:**
+```c
+#define SIZE 22
+
+#if SIZE > 20
+    void display(){
+        printf("Size > 20\n");
+    }
+    
+#elif SIZE == 20
+    void display(){
+        printf("Size = 20\n");
+    }
+#else SIZE < 20
+    void display(){
+        printf("Size < 20\n");
+    }
+#endif
+```
 </details>
   
  </details>
