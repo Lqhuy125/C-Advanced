@@ -25,7 +25,7 @@
 <summary><h4> 0.2 Typedef <h4></summary>
 
 - Typedef được sử dụng để đặt tên mới cho kiểu dữ liệu.
-#### Example:
+## Example:
 ```c
 #include <stdio.h>
 typedef int typeInt; //typeInt can be used in place of int
@@ -145,6 +145,7 @@ How to run file `main.exe` using cmd: ` ./main.exe ` or ` ./main `
     void name(){                        \
         printf("%s", (char*)#cmd);      \
     } 
+// # to inform that "#cmd" is a string 
 
 CREATE_FUNC1(test1, "This is test 1\n");
 CREATE_FUNC1(test2, "This is test 2\n");
@@ -170,6 +171,9 @@ int main(){
     double  double__##name;                 \
     char    char__##name 
 
+    // \ used for Line break and the last one don't use
+    // ## to connect two string 
+
     CREATE_VARIABLE(var1);
 ```
 Biến sẽ được khởi tạo thành: 
@@ -184,7 +188,7 @@ Reference Documents: https://www.geeksforgeeks.org/variadic-functions-in-c/
 
 **Example:**
 ```c
-#define VAR(...) __VAR_ARGS__
+#define VAR(...) __VA_ARGS__   //__VA_ARGS__ will be replaced by anything in (...)
 int main(){
 	VAR(hello world)
 	VAR(int a, int b, int c);
