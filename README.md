@@ -115,5 +115,86 @@ gcc main.o -o main
 How to run file `main.exe` using cmd: ` ./main.exe ` or ` ./main `
 </details>
 
+<details>
+<summary><h3>2. Macro <h3></summary>
+ <ul>
+<details>
+<summary><h4> 2.1 #define <h4></summary>
+<ul>
+<details>
+<summary><h4> 2.1.1 Expression <h4></summary>
+	
+**Example**:	
+```c
+#define SUM(a, b) (a + b)
+```
+</details>
+<details>
+<summary><h4> 2.1.2 CREATE FUNCTION <h4></summary>
+	
+**Example**:	
+```c
+#define CREATE_FUNC1(name, cmd)         \
+    void name(){                        \
+        printf("%s", (char*)cmd);       \
+    } 
+/* 
+    Co the su dung ` # `. Sau ` # ` se la chuoi nen se khong can ` "" ` 
+ */
+#define CREATE_FUNC2(name, cmd)         \
+    void name(){                        \
+        printf("%s", (char*)#cmd);      \
+    } 
+
+CREATE_FUNC1(test1, "This is test 1\n");
+CREATE_FUNC1(test2, "This is test 2\n");
+CREATE_FUNC2(test3, This is test 1\n); 
+CREATE_FUNC2(test4, This is test 2\n);
+
+int main(){
+    test1();
+    test2();
+    test3();
+    test4();
+}
+```
+
+</details>
+<details>
+<summary><h4> 2.1.3 CREATE VARIABLE <h4></summary>
+
+**Example**:	
+```c
+    #define CREATE_VARIABLE(name)           \
+    int     int__##name;                    \
+    double  double__##name;                 \
+    char    char__##name 
+
+    CREATE_VARIABLE(var1);
+```
+Biến sẽ được khởi tạo thành: 
+```c
+int int__var1; double double__var1; char char__var1;
+```
+
+</details>
+<details>
+<summary><h4> 2.1.4 Variadic in C <h4></summary>
+Reference Documents: https://www.geeksforgeeks.org/variadic-functions-in-c/	
+</details>
+</details>	
+
+<details>	
+<summary><h4> 2.2 #ifndef ... #else... #endif <h4></summary>
+
+</details>
+
+<details>
+<summary><h4> 2.3 #ifndef ... #else... #endif <h4></summary>
+
+</details>
+  
+ </details>
+
  
 
