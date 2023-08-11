@@ -305,6 +305,11 @@ pointer_name = NULL
 	
  **Syntax:**
 ```c
+datatype (*ptr) ( para_type_1, para_type_2, ...); //Khai bao con tro ham
+ptr = &function();			    	  //Gan dia chi cua ham cho con tro
+
+or
+
 ((func_data_type (*)(func_para_type_1, func_para_type_2, ...))name_func)(value_input, ...)
 ```
 **Example:**
@@ -325,16 +330,33 @@ void TinhToan(int a, int b, void (*ptr)(int a, int b)){
 }
 int main(int argc, char const *argv[])
 {
-    /* void (*ptr)(int, int);
+/*
+*  @brief Cach 1
+*/
+    void (*ptr)(int, int);
     ptr = &tong;
     ptr(9,7);
-    ptr = &hieu;
-    ptr(9,7);
+
     int (*ptrTich)(int, int) = &Tich;
-    printf("%d\n", ptrTich(5, 5)); */
-    TinhToan(1, 2, &tong);
-    TinhToan(3, 2, &hieu);
-    return 0;
+    printf("%d\n", ptrTich(5, 5));
+
+    void (*ptrTinhtoan)(int, int, void(*));
+    ptrTinhtoan = &TinhToan;
+    ptrTinhtoan(2, 4, tong);
+/*
+*  @brief Cach 2
+*/
+   ((void (*)(int, int))tong)(9, 7);
+
+   printf("Tich: %d", ((int (*)(int, int))Tich)(5, 5));
+	
+   ((void (*)(int, int, void(*)))TinhToan)(2, 4, tong);
+
+/*
+*  @brief Using Function Pointer to caculator
+*/
+   TinhToan(1, 2, &tong);
+   TinhToan(3, 2, &hieu);
 }
 ```
 </details>
