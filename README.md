@@ -247,5 +247,175 @@ Thường được sử dụng để tránh việc define một tên nhiều l�
   
  </details>
 
+<details>
+<summary><h3>3. Pointer<h3></summary>
+<ul>
+
+***Pointer*** can be used to store memory address of variable, function and other pointer
+<details>
+<summary><h4>3.1 Pointer<h4></summary>
+<ul>
+	
+**Syntax:**
+```c
+datatype * ptr;
+```
+
+**Example:**
+```c
+#include <stdio.h>
+
+int main(int argc, char const *argv[])
+{
+    int a = 10;
+
+    int * ptr = &a;
+
+    printf("Address of a: %p\n", &a); 			//Address of a: 000000b66e5ff6dc
+
+    printf("Address of pointer: %p\n", &ptr); 		//Address of pointer: 000000b66e5ff6d0
+    printf("Value of pointer: %p\n", ptr);		//Value of pointer: 000000b66e5ff6dc
+    printf("Value of variable pointer: %d\n", *ptr);	//Value of variable pointer: 10
+
+    return 0;
+}
+``` 
+</details>
+
+<details>
+<summary><h4>3.2 NULL Pointer<h4></summary>
+<ul>
+
+- Khi khai báo một biến con trỏ cần gán cho nó một địa chỉ. Nếu chưa sử dụng thì nên gán địa chỉ NULL
+- Khi sử dụng xong 1 biến con trỏ cũng nên gán trả lại NULL
+  
+=> Tránh việc con trỏ trỏ tới một địa chỉ ngẫu nhiên mà chương trình đang sử dụng gây sai lệnh or nhầm lẫn
+
+**Syntax:**
+```c
+data_type *pointer_name = NULL;
+        or
+pointer_name = NULL
+```
+</details>
+	
+<details>
+<summary><h4>3.3 Function Pointer<h4></summary>
+<ul>
+	
+ **Syntax:**
+```c
+((func_data_type (*)(func_para_type_1, func_para_type_2, ...))name_func)(value_input, ...)
+```
+**Example:**
+```c
+#include <stdio.h>
+void tong(int a, int b){
+    printf("%d + %d = %d\n", a, b, a+b);
+}
+void hieu(int a, int b){
+    printf("%d - %d = %d\n", a, b, a-b);
+}
+int Tich(int a, int b){
+    return a*b;
+}
+void TinhToan(int a, int b, void (*ptr)(int a, int b)){
+    printf("Ham tinh toan:\n");
+    ptr(a, b);
+}
+int main(int argc, char const *argv[])
+{
+    /* void (*ptr)(int, int);
+    ptr = &tong;
+    ptr(9,7);
+    ptr = &hieu;
+    ptr(9,7);
+    int (*ptrTich)(int, int) = &Tich;
+    printf("%d\n", ptrTich(5, 5)); */
+    TinhToan(1, 2, &tong);
+    TinhToan(3, 2, &hieu);
+    return 0;
+}
+```
+</details>
+
+<details>
+<summary><h4>3.4 Void Pointer<h4></summary>
+<ul>
+
+ **Syntax:**
+```c
+void * pointer_name;
+```
+**Example:**
+```c
+#include <stdio.h>
+
+int tong(int a, int b){
+    return a+b;
+}
+
+int main(int argc, char const *argv[])
+{
+    void *ptr;
+    int i = 10;
+    double d = 1.1;
+    char c = 'c';
+    
+    ptr = &i;
+    printf("Dia chi: %p, Gia tri: %d\n", ptr, *(int *)ptr);
+
+    ptr = &d;
+    printf("Dia chi: %p, Gia tri: %f\n", ptr, *(double *)ptr);
+
+    ptr = &c;
+    printf("Dia chi: %p, Gia tri: %c\n", ptr, *(char *)ptr);
+
+    ptr = &tong;
+    printf("Dia chi: %p\n", ptr);
+    printf("Gia tri: %d\n", ((int (*)(int, int))ptr)(1,2));
+}
+```
+**Output:**
+```
+Dia chi: 000000ede39ffa64, Gia tri: 10
+Dia chi: 000000ede39ffa58, Gia tri: 1.100000
+Dia chi: 000000ede39ffa57, Gia tri: c
+Dia chi: 00007ff6f4311591
+Gia tri: 3
+```
+
+</details>
+
+<details>
+<summary><h4>3.5 Pointer to Pointer<h4></summary>
+<ul>
+
+**Example:**
+```c
+#include <stdio.h>
+
+int main(int argc, char const *argv[])
+{
+    int a = 10;
+    int *ptr = &a;
+    int **ptp = &ptr;
+
+    printf("Addr of a: %p\n", &a);
+    printf("Addr_ptr: %p Val_ptr: %p Val_var_ptr: %d\n", &ptr, ptr, *ptr);
+
+    printf("Addr_ptr: %p Val_ptr: %p Val_var_ptr: %d", &ptp, ptp, **ptp);
+    return 0;
+}
+```
+**Output:**
+```c
+Addr of a: 000000b82e5ff66c
+Addr_ptr: 000000b82e5ff660 Val_ptr: 000000b82e5ff66c Val_var_ptr: 10
+Addr_ptp: 000000b82e5ff658 Val_ptp: 000000b82e5ff660 Val_var_ptp: 10
+```
+</details>
+ 
+</details>
  
 
