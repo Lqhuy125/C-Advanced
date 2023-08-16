@@ -437,7 +437,19 @@ Addr_ptr: 000000b82e5ff660 Val_ptr: 000000b82e5ff66c Val_var_ptr: 10
 Addr_ptp: 000000b82e5ff658 Val_ptp: 000000b82e5ff660 Val_var_ptp: 10
 ```
 </details>
+</details>
+
+<details>
+<summary><h3>4. Variable<h3></summary>
+<ul>
+<details>
+<summary><h4>4.1 Static <h4></summary>
+<ul>
+
  
+</details>
+
+
 </details>
  
 
