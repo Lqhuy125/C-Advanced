@@ -441,14 +441,75 @@ Addr_ptp: 000000b82e5ff658 Val_ptp: 000000b82e5ff660 Val_var_ptp: 10
 
 <details>
 <summary><h3>4. Variable<h3></summary>
+	
+![alt text](https://media.geeksforgeeks.org/wp-content/cdn-uploads/Storage-Classes-In-C.png)
+
 <ul>
 <details>
 <summary><h4>4.1 Static <h4></summary>
 <ul>
 
+	- Ứng dụng khi code MCU: VD Chạy hàm Init() 1 lần duy nhất rồi sau đó k chạy hàm Init() lần nào nữa
+</details>
+
+<details>
+<summary><h4>4.2 Extern <h4></summary>
+	
+- Có thể sử dụng variable/function của file khác:
+  
+```c
+main.c
+#include <stdio.h>
+
+extern int x;
+int main(){
+	printf("%d\n", x); // return 10
+}
+```
+
+```c
+main.h
+#include <stdio.h>
+
+int x = 10;
+```
+<ul>
  
 </details>
 
+<details>
+<summary><h4>4.3 Register <h4></summary>
+<ul>
+	- Tốc độ xử lý sẽ nhanh hơn khi vì biến lưu ở CPU register thay vì RAM
+	
+	- Can't get the address of the register variable 
+ 
+</details>
+
+<details>
+<summary><h4>4.4 Volatile <h4></summary>
+
+ 	- Tránh xảy ra lỗi do tính năng optimization của compiler
+  	- VD: Trong Embedded nếu biến count để đếm số lần ngắt ngoài 
+   	      thì có thể không cập nhật vì biến count không bị thay đổi bởi phần mềm
+
+```c
+volatile int count;
+
+void ISR() {
+count++;
+}
+
+int main() {
+while (1) {
+// do something
+}
+return 0;
+}
+```
+<ul>
+ 
+</details>
 
 </details>
  
