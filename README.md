@@ -479,15 +479,18 @@ int x = 10;
 
 <details>
 <summary><h4>4.3 Register <h4></summary>
-<ul>
-	- Tốc độ xử lý sẽ nhanh hơn khi vì biến lưu ở CPU register thay vì RAM
 	
-	- Can't get the address of the register variable 
- 
+```c
+- biến lưu ở CPU register có tốc độ xử lý nhanh hơn biến lưu ở RAM 
+nhưng bộ nhớ Register có giới hạn nên chỉ sử dụng khi nào cần thiết
+- Can't get the address of the register variable.
+```
 </details>
 
 <details>
 <summary><h4>4.4 Volatile <h4></summary>
+
+- Thông báo cho compiler không tối ưu hàm đã được khởi tạo sẵn( sử dụng giá trị đã được khởi tạo từ trước)
 
  	- Tránh xảy ra lỗi do tính năng optimization của compiler
   	- VD: Trong Embedded nếu biến count để đếm số lần ngắt ngoài 
@@ -508,9 +511,123 @@ return 0;
 }
 ```
 <ul>
+</details>
+</details>
  
+<details>
+<summary><h3>5. Phân vùng nhớ<h3></summary>
+
+**Phân vùng trong RAM:**
+![alt text](https://github.com/Lqhuy125/C-Advanced/blob/master/5_Phan_Vung_Nho/Phanvungnho.png)
+
+<ul>
+<details>
+<summary><h4>5.1 Text<h4></summary>
+<ul>
+	
+	- Chỉ có quyền Read 
+ 
+	- Chứa lệnh thực thi chương trình
+ 
+	- Chứa các khai báo hằng số trong chương trình. vd: const int x = 10;
+
+ **Note:**
+```c
+Khi mà chương trình nạp vào con vxl nó sẽ lưu vào trong phân vùng flash(thông tin sẽ k bị mất đi kể cả khi mất nguồn).
+VD: như những phần mềm có ở trên máy, nó được lưu ở phân vùng flash.
+Vì khi đó tắt nguồn mở lên thì dữ liệu vẫn sẽ còn.
+Khi click vào để run program, thì source code của chương trình đang
+được lưu ở flash nó sẽ coppy sang RAM( phân vùng text) để chạy
+```
+</ul>
 </details>
 
-</details>
+<details>
+<summary><h4>5.2 Data<h4></summary>
+<ul>
+	
+	- Quyền truy cập là Read/Write. 
+	
+	- Chứa biến toàn cục or biến static với giá trị khởi tạo khác không.
  
+	- Được giải phóng khi kết thúc chương trình. 
+
+</ul>
+</details>
+
+<details>
+<summary><h4>5.3 bss<h4></summary>
+<ul>
+	
+	- Quyền truy cập là Read/Write.
+	
+	- Chứa biến toàn cục or biến static với giá trị khởi tạo bằng không or không khởi tạo.
+ 
+	- Được giải phóng khi kết thúc chương trình.
+
+</ul>
+</details>
+
+<details>
+<summary><h4>5.4 Heap<h4></summary>
+<ul>
+	
+	– Quyền truy cập là Read/Write.
+	
+	– Được sử dụng để cấp phát bộ nhớ động như: Malloc, Calloc, …
+ 
+	– Sẽ được giải phóng khi gọi hàm free,…
+
+**Example:**
+```c
+//malloc/calloc return void* => can ep kieu
+
+uint16_t *ptr = (uint16_t*)malloc(sizeof(uint16_t)*5);  //cap phat bo nho
+
+ptr = (uint16_t*)realloc(ptr, sizeof(uint16_t)*7); 	//thay doi bo nho cua mang truoc do
+
+free(ptr);						//Giai phong vung nho 
+```
+</ul>
+</details>
+
+<details>
+<summary><h4>5.5 Stack<h4></summary>
+<ul>
+	
+	– Quyền truy cập là Read/Write.
+	
+	– Được sử dụng cấp phát cho biến local, input parameter của hàm,…	
+ 	
+	– Sẽ được giải phóng khi ra khỏi block code/hàm
+ **Note:** 
+- Dù là hằng số nhưng nếu được khai báo trong hàm bất kì( biến này sẽ trở thành biến cục bộ)
+=> biến này sẽ được lưu vào phân vùng **Stack**
+
+**Example:**
+```c
+void func(int a, int b){
+    int c = a + b;
+    printf("%d\n", c);
+    //Note
+    const int i = 10;           // SE DUOC LUU TAI PHAN VUNG STACK 
+                                // VI LA BIEN CUC BO MAC DU LA HANG SO
+}
+```
+</ul>
+</details>
+
+**Note: So sánh Heap và Stack**
+- Đều là vùng nhớ được tạo ra và lưu trữ trong RAM khi chương trình được thực thi
+- Stack: Lưu biến cục bộ, tham số truyền vào hàm. Heap: Lưu vùng nhớ cho các biến con trỏ cấp phát động
+- Kích thước vùng nhớ:(cố định hay không cố định)
+- Dặc điểm vùng nhớ: (Quản lý ntn? Bởi ai? Vùng nhớ sẽ ảnh hưởng ntn sau khi thực hiện/hành động 1 quá trình nào đó?)
+
+</details>
+
+<details>
+<summary><h3>6. <h3></summary>
+
+</details>
+
 
