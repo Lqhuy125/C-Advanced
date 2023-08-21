@@ -634,10 +634,7 @@ void func(int a, int b){
 int function_name(data_type variable_name, ...);
 ```    
 - Để gọi được hàm này cần khai báo thư viện: `#include <stdarg.h>`
-
-    <details>
-    <summary><h4>6.1 <h3></summary>
-
+  
     **Example:**
     ```c
     #include <stdio.h>
@@ -670,9 +667,7 @@ int function_name(data_type variable_name, ...);
         return 0;
     }
     ```
-    </details>
-
-
+    
 </details>
 
 
