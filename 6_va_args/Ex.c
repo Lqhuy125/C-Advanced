@@ -19,9 +19,8 @@ void sum(int count, ...)
     {
         val_int = va_arg(ptr_int, int);
         printf("%d\t", val_int);
-        if(val_int<500000000 || val_int>-5000000000){
+        //if(val_int<500000000 || val_int>-5000000000)
             res_int += val_int;
-        }
     }
 
     printf("\n----------------\n");
@@ -41,5 +40,5 @@ void sum(int count, ...)
     printf("\n%f", res);
 }
 int main(){
-    sum(100, 1, 2, 3.2);
+    sum(3, 1, 2, 3.2);
 }
