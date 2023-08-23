@@ -671,9 +671,48 @@ int function_name(data_type variable_name, ...);
 </details>
 
 <details>
-<summary><h3>7. <h3></summary>
+<summary><h3>7. Goto and Setjump<h3></summary>
 <ul>
+<details>
+<summary><h4>7.1 Goto<h4></summary> 
+
+**Syntax:** 
+```
+Syntax1      |   Syntax2
+----------------------------
+goto label;  |    label:  
+.            |    .
+.            |    .
+.            |    .
+label:       |    goto label;
+```
+**Note:**
+
+- Thường được sử dụng để break các vòng lặp lồng nhau.
+    
+    VD: Có 3 vòng lặp lồng nhau, khi break 1 vòng lặp thì nó sẽ ra vòng lặp bên ngoài. 
+    
+    => sử dụng goto sẽ hợp lý hơn
+- Chỉ sử dụng được trong phạm vi 1 function
+</details>
 
 
+<details>
+<summary><h4>7.2 Setjump<h4></summary>
+
+- setjump and longjump are defined in ***setjmp.h***
+ 
+**Syntax:** 
+```c
+jmp_buf buf; //Khai bao buf
+
+setjump(buf); //uses buf to remember the current position and returns 0.
+
+longjump(buf, i); //when call this func will Go back to the place buf (setjump) is pointing to and return i.
+``` 
+**Note:**
+
+- Có thể sử dụng để làm biến toàn cục
+</details>
 
 </details>
