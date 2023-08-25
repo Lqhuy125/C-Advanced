@@ -716,3 +716,36 @@ longjump(buf, i); //when call this func will Go back to the place buf (setjump) 
 </details>
 
 </details>
+
+
+<details>
+<summary><h3>8. Bit mask<h3></summary>
+<ul>
+
+- dich trai
+- dih phai
+- phep or
+- phep and
+- dao bit
+
+vd: sd bit mask kiem tra gio hang xem co cac mat hang nao
+
+cac mat hang su dung enum de thiet ke
+
+**Note:**
+- clear bit: giohang &= ~ao
+- set: giohang |= ao
+
+- check bit: dulieucanCheck  & (1 << vi tri can kiem tra)
+
+    == 0 thi bit tai vitriCheck = 0
+
+    !=0  thi bit tai vitriCheck = 1
+</details>
+
+<details>
+<summary><h3>9. <h3></summary>
+<ul>
+
+</details>
+
