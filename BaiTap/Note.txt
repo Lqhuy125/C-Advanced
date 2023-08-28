@@ -1,0 +1,14 @@
+int isspace( int ch );                                              //ctype.h
+    Checks if the given character is a whitespace character
+    return 0 or 1
+
+void* memmove( void* dest, const void* src, size_t count );         //string.h
+    dest	-	pointer to the object to copy to 
+    src	-	pointer to the object to copy from      
+    count	-	number of bytes to copy
+
+    ex:  
+        char test_int[] = "abcdefghdsfsadfsad";
+        memmove(test_int, test_int + 8, 18 - 3 + 1);
+        // src   = lấy từ ký tự thứ 8 (đếm từ 0->7)
+        // count = từ ký tự thứ 8 đến cuối là 10 ký tự nhưng phải count = 11

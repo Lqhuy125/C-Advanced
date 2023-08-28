@@ -744,7 +744,7 @@ cac mat hang su dung enum de thiet ke
 </details>
 
 <details>
-<summary><h3>9. <h3></summary>
+<summary><h3>9. Áp dụng setjump trong Try Catch<h3></summary>
 <ul>
 
 </details>
