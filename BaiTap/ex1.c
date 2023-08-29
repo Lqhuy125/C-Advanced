@@ -117,7 +117,7 @@ int main(int argc, char const *argv[])
     else printf("Khong co\n"); 
 
     //Tìm và thay thế 1 đoạn
-    find_and_change_str(str, "leaning out on", "hello world");
+    find_and_change_str(str, "man scream", "how can i help you");
     printf("%s\n", str);
 
 
