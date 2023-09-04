@@ -3,82 +3,201 @@
 //Tim va thay the: vd: "leaning out on" -> "hello world"
 
 #include <stdio.h>
-#include <string.h>
 #include <stdbool.h>
-#include <ctype.h>
+#include <stdint.h>
 
-char str[] = "    i heard a man scream when he saw the little girl leaning out on the ledge. the little girl kept leaning more and more and climbed over the ledge, she held on only with two arms and her legs were in the air. day la dong test 1. day la dong test 2";
+char str[] = "a I heard a man scream when he saw the little girl leaning out on the ledge. the little girl kept leaning more and more and climbed over the ledge, she held on only with two arms and her legs were in the air. test 1. test 2";
 
+int str_len(char *str);
+void VietHoaChuCaiDau(char *arr);
+int find_arr_C1(char *new_str, char *str);
+int find_arr_c2(char *string, char *text);
+void find_and_change_str( char *str, char *oldSubstr, char *newSubstr);
+
+int main(int argc, char const *argv[])
+{
+
+    //Viết hoa chữ cái đầu
+    // VietHoaChuCaiDau(str);
+    // printf("%s\n", str);
+
+    // printf("%d\n", str_len(str));
+
+    //Tìm kiếm 1 đoạn
+    printf("---------------------------------\n");
+    char test1[] = "scream";
+    // if(find_arr_c1(str, test1) == 1) printf("Co\n");
+    // else printf("Khong co\n"); 
+    //find_arr_c2(str, test1);
+
+    //Tìm và thay thế 1 đoạn
+    printf("---------------------------------\n");
+    //find_and_change_str(str, "man scream", "how can i help you");
+    find_and_replace_str_c2(str, "I heard", "the new words");
+
+
+    return 0;
+}
+/* 
+ *      @brief Tính độ dài chuỗi
+ */
+int str_len(char *str){
+    uint8_t count = 0;
+    while (*str!='\0')
+    {
+        count++;
+        str++;
+    }
+    return count;
+}
 /* 
  *      @brief Cắt khoảng trắng đầu mỗi câu  
  */
-void trim_SpaceOfStr(char *str) {
-    int len = strlen(str);
-    int i = 0;
+// void trim_SpaceOfStr(char *str) {
+//     int len = strlen(str);
+//     int i = 0;
 
-    while (i < len) {
-        if (isspace(str[i])) {
-            i++;
-        } else {
-            break;
-        }
-    }
-    //str,str+3, 6
-    memmove(str, str + i, len - i + 1); //
-}
+//     while (i < len) {
+//         if (isspace(str[i])) {
+//             i++;
+//         } else {
+//             break;
+//         }
+//     }
+//     //str,str+3, 6
+//     memmove(str, str + i, len - i + 1); //
+// }
 
 /* 
  *      @brief Viết hoa chữ cái đầu sau mỗi dấu chấm câu
  */
 void VietHoaChuCaiDau(char *arr){
-    arr[0] = toupper(arr[0]);
-    for(int i = 0; arr[i]!='\0'; i++){
-        if(arr[i] == '.'){
-            arr[i+2] = toupper(arr[i+2]);
-            i+=2;
+    // arr[0] = arr[0] - 32;
+    // for(int i = 0; arr[i]!='\0'; i++){
+    //     if(arr[i] == '.'){
+    //         if(arr[i+1] == ' '){
+    //             arr[i+2] = arr[i+2] - 32;
+    //             i+=2;
+    //         }
+    //     }
+    // }
+
+    *arr = *arr - 32;
+    while (*arr != '\0')
+    {
+        if(*arr == '.'){
+
+            arr++;
+
+            if (*arr == ' ') arr++;
+            
+            *arr = *arr - 32;
+            
         }
+        arr++;
     }
     
 }
 /* 
  *      @brief Tìm kiếm một đoạn trong str
  */
-int find_arr(char *new_str, char *str){
+int find_arr_C1(char *str, char *new_str){
 
+    /* 
+     *   @brief  Using array
+     */
+    // bool find = false;
+    // for(int i = 0; i < str_len(str) - str_len(new_str); i++){ //vd: chuỗi dài 10, chuỗi con dài 3 thì sẽ phải ktra từ vị trí 0 -> 7
+    //     if(str[i] == new_str[0]){
+    //         find = true;
+    //         int j;
+    //         for( j = 1; j < str_len(new_str)-1; j++){
+    //             if(str[i+j] != new_str[j]){
+    //                 find = false;
+    //                 break;
+    //             }
+    //         }
+    //         if(find==true){
+    //             break;
+    //         }
+    //     }
+    // }
+    // if(find == true) return 1;
+    // else return 0;
+
+    /* 
+     *   @brief  Using pointer 
+     */
     bool find = false;
-    for(int i = 0; i < strlen(str) - strlen(new_str); i++){ //vd: chuỗi dài 10, chuỗi con dài 3 thì sẽ phải ktra từ vị trí 0 -> 7
-        if(str[i] == new_str[0]){
+    uint8_t len_str = str_len(str);
+    uint8_t len_new_str = str_len(new_str);
+    for(uint8_t i = 0; i < len_str - len_new_str; i++ ){
+        if(*str == *new_str){
             find = true;
-            int j;
-            for( j = 1; j < strlen(new_str)-1; j++){
-                if(str[i+j] != new_str[j]){
+            int count = 0;
+            for (int j = 1; j < len_new_str; j++)
+            {
+                str++;
+                new_str++;
+                count++;
+                if(*str != *new_str){
                     find = false;
+                    new_str -= count;
                     break;
                 }
             }
             if(find==true){
                 break;
+            } 
+        }
+        else str++;
+    }
+
+    if(find) return 1;
+    else return 0;
+}
+int find_arr_c2(char *string, char *text){
+
+    printf("Text: %s \n KetQua: ", text);
+
+    uint8_t i = 0;
+    uint8_t count = 0;
+
+    while (*string != '\0')
+    {
+        if(*string == *text){
+            text++;
+            i++; //vi tri dau tien cua chuoi con trong chuoi bo
+            if(*text == '\0'){
+                uint8_t location = count - i + 1;
+                printf("Co\nVi tri: %d\n", location);
+                return; // vẫn kiểm tra khi chưa hết chuỗi. k sử dụng được break vì sẽ làm thoát vòng kiểm tra
             }
         }
+        else
+            i = 0;
+
+        string++;
+        count++;
     }
-    if(find == true) return 1;
-    else return 0;
+    printf("Khong co");
 }
 /* 
  *      @brief Thay thế chuỗi con
+ *      Sử dụng mảng khác lưu kết quả nên sẽ bị tốn bộ nhớ 
  */
-void find_and_change_str( char *str, char *oldSubstr, char *newSubstr){
+void find_and_change_str(char *str, char *oldSubstr, char *newSubstr){
     
     //Tao mot chuoi luu du lieu
     char result[1000];
     int i=0, j = 0, k = 0;
     //duyệt chuỗi gốc
-    while(i < strlen(str)){
+    while(i < str_len(str)){
         int match = 1;
 
         //tìm kiếm vị trí của chuỗi con muốn thay đổi
         //Nếu k gắp thì sẽ coppy hết những đoạn mà không phải là chuỗi con vào chuỗi Result
-        for(j = 0; j < strlen(oldSubstr); j++){
+        for(j = 0; j < str_len(oldSubstr); j++){
             if(str[i+j] != oldSubstr[j]){
                 match = 0;
                 break;
@@ -86,41 +205,33 @@ void find_and_change_str( char *str, char *oldSubstr, char *newSubstr){
         }
         //coppy vào Result những ký tự giống đang tìm để thay
         if(match){
-            for(j = 0; j < strlen(newSubstr); j++){
+            for(j = 0; j < str_len(newSubstr); j++){
                 result[k++] = newSubstr[j];
             }
             //Sau khi ghi xong vào Result những ký tự giống, vị trí i trong Result sẽ nhảy lên Độ dài của chuỗi cũ
-            i += strlen(oldSubstr);
+            i += str_len(oldSubstr);
         }
         //coppy vào Result những ký tự khác chuỗi đang tìm
         else{
             result[k++] = str[i++];
         }
-        
     }
+    //Hiển thị chuỗi con mới
     for(i = 0; i <= k; i++){
         str[i] = result[i];
     }
 }
+void find_and_replace_str_c2(char *str, char *oldSubstr, char *newSubstr){
 
-int main(int argc, char const *argv[])
-{
-    //Cắt khoảng trống đầu câu
-    trim_SpaceOfStr(str);
+    //Tìm xem có chuỗi cũ hay k. Nếu không => In ra không có
+    while (*str == '\0')
+    {
+        if(*str == *oldSubstr){
+            oldSubstr++;
+            if(*oldSubstr == '\0') break;
+        }
 
-    //Viết hoa chữ cái đầu
-    VietHoaChuCaiDau(str);
-    printf("%s\n", str);
-
-    //Tìm kiếm 1 đoạn
-    if(find_arr("leaning out on", str) == 1) printf("Co\n");
-    else printf("Khong co\n"); 
-
-    //Tìm và thay thế 1 đoạn
-    find_and_change_str(str, "man scream", "how can i help you");
-    printf("%s\n", str);
-
-
-
-    return 0;
+        str++;
+    }
+    
 }
