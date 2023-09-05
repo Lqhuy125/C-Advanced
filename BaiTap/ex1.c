@@ -171,7 +171,7 @@ int find_arr_c2(char *string, char *text){
             if(*text == '\0'){
                 uint8_t location = count - i + 1;
                 printf("Co\nVi tri: %d\n", location);
-                return; // vẫn kiểm tra khi chưa hết chuỗi. k sử dụng được break vì sẽ làm thoát vòng kiểm tra
+                return; // kết thúc hàm luôn, break thì sẽ chỉ thoát ra vòng lặp
             }
         }
         else
@@ -195,8 +195,9 @@ void find_and_change_str(char *str, char *oldSubstr, char *newSubstr){
     while(i < str_len(str)){
         int match = 1;
 
-        //tìm kiếm vị trí của chuỗi con muốn thay đổi
-        //Nếu k gắp thì sẽ coppy hết những đoạn mà không phải là chuỗi con vào chuỗi Result
+        //Tìm kiếm vị trí của chuỗi con muốn thay đổi
+        //Nếu k gặp thì sẽ coppy hết những đoạn mà không phải 
+        //là chuỗi con vào chuỗi Result (1)
         for(j = 0; j < str_len(oldSubstr); j++){
             if(str[i+j] != oldSubstr[j]){
                 match = 0;
@@ -208,10 +209,12 @@ void find_and_change_str(char *str, char *oldSubstr, char *newSubstr){
             for(j = 0; j < str_len(newSubstr); j++){
                 result[k++] = newSubstr[j];
             }
-            //Sau khi ghi xong vào Result những ký tự giống, vị trí i trong Result sẽ nhảy lên Độ dài của chuỗi cũ
+            //Sau khi ghi xong vào Result những ký tự giống
+            //vị trí i trong Result sẽ nhảy lên Độ dài = độ dài chuỗi cũ
+            //Rồi sau đó tiếp tục lưu những đoạn còn lại vào Result tiếp
             i += str_len(oldSubstr);
         }
-        //coppy vào Result những ký tự khác chuỗi đang tìm
+        // (1)coppy vào Result những ký tự khác chuỗi đang tìm
         else{
             result[k++] = str[i++];
         }
@@ -221,17 +224,49 @@ void find_and_change_str(char *str, char *oldSubstr, char *newSubstr){
         str[i] = result[i];
     }
 }
-void find_and_replace_str_c2(char *str, char *oldSubstr, char *newSubstr){
+void find_and_replace_str_c2(char *str, char *text1, char *text2){
 
-    //Tìm xem có chuỗi cũ hay k. Nếu không => In ra không có
-    while (*str == '\0')
-    {
-        if(*str == *oldSubstr){
-            oldSubstr++;
-            if(*oldSubstr == '\0') break;
+    uint8_t j=0, i=0;
+
+    //Tim vi tri dau tien va vi tri cuoi cung cua chuoi con cu
+    while(str[0] != '\0'){
+        if ( str[j] == text1[i])
+        {
+            i++;
+            if(text1[i] == '\0') break;
         }
+        else i=0;
 
-        str++;
+        j++;
+        
     }
-    
+    if(text1[i] != '\0') printf("Khong co\n");
+
+    //Bắt đầu thay thế
+    uint8_t location_final = j;
+    uint8_t location_first = j - i + 1;
+    uint8_t length_string = str_len(str);
+    uint8_t length_update = length_string - str_len(text1) + str_len(text2);
+
+    //TH text 2 > text 1
+    if(length_string < length_update){
+
+    }
+    else{
+        while (*text2 != '\0')
+        {
+            str[location_first] = *text2;
+            //printf("%c\n", str[location_first]);
+            location_first++;
+            text2++;
+        }
+        location_final++;
+        while(location_first < length_update){
+            str[location_first] = str[location_final];
+            //printf("\n%c\n", str[location_first]);
+            location_first++;
+            location_final++;
+        }
+        str[length_update ] = '\0';
+    }
 }

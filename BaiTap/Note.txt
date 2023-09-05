@@ -12,3 +12,52 @@ void* memmove( void* dest, const void* src, size_t count );         //string.h
         memmove(test_int, test_int + 8, 18 - 3 + 1);
         // src   = lấy từ ký tự thứ 8 (đếm từ 0->7)
         // count = từ ký tự thứ 8 đến cuối là 10 ký tự nhưng phải count = 11
+
+Chuyển 1 chữ thường thành 1 chữ in thì chỉ cần trừ đi 32
+
+Thuật toán tìm chuỗi:
+Cách1: (khi sử dụng con trỏ thì nên lấy độ dài ở đầu trước khi tham chiếu con trỏ)
+B1: Khởi tạo vòng lặp từ 0 -> độ dài(cha) - độ dài(con)
+    Kiểm tra vị trí đầu tiên của hai chuỗi cha và con
+    
+    nếu không, vị trí con trỏ chuỗi cha tăng lên 1
+
+B2: - nếu bằng, lưu biến check=true
+    - Khởi tạo vòng lặp từ 1 -> vị trí cuối của chuỗi con
+    - Sau đó, tăng cả vị trí con trỏ của 2 chuỗi rồi so sánh
+    (lưu 1 biến count để check xem nếu không bằng sẽ trừ đi count lần vị trí )
+    - Nếu nó khác nhau, break vòng lặp, check=false, con trỏ chuỗi con trở về vị trí -count
+    - Nếu sau khi hết vòng lặp trong việc tăng cả 2 vị trí con trỏ của 2 chuỗi so sánh 
+    mà nó k khác nhau(tức check vẫn bằng true)
+    break vòng lặp ngoài, kết thúc hàm, kết luật có tìm thấy
+
+Cách 2:
+ dùng while() ktra xem chuỗi cha là vị ký tự \0 không
+    Nếu có, trả về không có
+    Nếu không, kiểm tra vị trí đầu chuỗi cha và chuỗi con
+        Nếu chuỗi con là ký tự \0 thì return kết thúc hàm luôn
+        Nếu không phải, thì con trỏ chuỗi cha lại tăng lên tiếp
+
+Thuật toán thay thế chuỗi
+Cách1: Sử dụng chuỗi khác để lưu kết quả (tốn bộ nhớ hơn)
+
+    - Khởi tạo vòng lặp với i < độ dài chuỗi cha
+        Kiểm tra thành phần chuỗi cha có giống chuỗi con cũ hay không
+        Nếu không giống, coppy hết những đoạn không giống từ trái qua phải 
+            vào mảng mới
+        Nếu từ trái qua phải thấy bắt đầu giống chuỗi con cũ thì coppy đoạn
+            chuỗi con mới vào vị trí thấy giống, rồi sau đó 
+
+        Rồi lặp lại cho đến cuối chuỗi cha
+
+Cách2:
+
+B1: Tìm kiếm được vị trí đầu tiên và vị trí cuối cùng của chuỗi con cũ
+    - với TH text mới nhỏ hơn text cũ 
+
+    B2: Sau đó gán vị trí đầu với vị trí đầu tiên của text 2
+    Tiếp đó cứ ++ vị trí của text1 rồi gán với vị trí ++ của text2 
+    (sử dụng while cho đến khi text2 gặp null)
+
+    B3: Tiếp đến, di chuyển vị trí cuối cùng của chuỗi con cũ lên 1.
+    while kiểm tra vị trí đầu tiên sau khi cộng ở B2
