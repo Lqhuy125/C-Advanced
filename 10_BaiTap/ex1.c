@@ -252,6 +252,7 @@ void find_and_replace_str_c2(char *str, char *text1, char *text2){
     if(length_string < length_update){
 
     }
+    //Text2 < Text1
     else{
         while (*text2 != '\0')
         {
