@@ -1,0 +1,6 @@
+Bài 2:
+
+tạo một kiểu dữ liệu word (struct) để tạo 1 mảng word bao gồm các tên khác nhau
+
+mỗi 1 word sẽ là 1 từ.
+
