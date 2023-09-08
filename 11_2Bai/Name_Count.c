@@ -8,11 +8,52 @@ char string[] = "nam hoang bao, nam hoang hoang, bao bao yen, anh bao yen";
 typedef struct{
     char *ptr;
     uint8_t length;
-    uint8_t quality;
-    bool status;
+    uint8_t quality;        //Đếm số lượng xuất hiện của các phần tử trong mảng
+    bool status;            //Lưu trạng thái của các biến đếm. Nếu giống nhau thì status=0 khác status =1 để hiển thị k bị trùng
 
 }words;
 
+words* splitstring( char *str, uint8_t size);
+void mirrorName(words *string, int size);
+int sizeString(char *str);
+void findName(words *array, int size);
+void printName(words *array, int size);
+bool compare(const char *str1, const char *str2);
+void sortAlphabet(words *array, int size);
+ 
+int main() {
+    char string[] = "nam hoang bao, nam hoang hoang, bao bao yen, anh bao yen";
+
+    uint8_t size = sizeString(string);
+    words *a = splitstring(string, size);
+
+    // findName(a, 12);
+
+    // printName(a, 12);
+    
+    //mirrorName(a, sizeStrg);
+
+    sortAlphabet(a, size);
+    
+    free(a);
+    return 0;
+}
+
+/* 
+        @brief Đếm trong chuỗi có bao nhiêu từ
+ */
+int sizeString(char *str){
+    uint8_t size = 1;
+    while (*str!='\0')
+    {
+        if(*str == ' ') size++;
+        str++;
+    }
+    return size;
+}
+/* 
+        @brief Tách chuỗi thành các từ đơn và lưu vào mảng array = {words, words, ...} có kiểu dữ liệu là words
+ */
 words* splitstring( char *str, uint8_t size){
 
     words *array = (words *)malloc(sizeof(words)*size);
@@ -43,7 +84,7 @@ words* splitstring( char *str, uint8_t size){
             array[index].ptr = str;
 
         }   
-        //Nếu chưa kết thúc chữ nào đấy thì con trỏ vẫn ++ lên
+        //Nếu chưa kết thúc chữ nào đấy thì con trỏ vẫn ++ lên và độ dài chữ đó vẫn được đếm lên
         else{
             str++;
             count++;
@@ -54,38 +95,114 @@ words* splitstring( char *str, uint8_t size){
     array[index].length = count;
 
     return array;
-} 
-int str_len(char *str){
-    uint8_t count = 0;
-    while (*str!='\0')
-    {
-        count++;
-        str++;
-    }
-    return count;
 }
-int countName(words *wordsArray, int size, char *targetName) {
-    int count = 0;
-    int targetLength = str_len(targetName);
+
+/* 
+        @brief Đếm số lần xuất hiện của từng từ trong chuỗi
+
+        Sử dụng biến status để đánh dấu những tên đã xuất hiện
+
+        Hàm này cần phải gọi trước hàm printName() nếu muốn in số lần xuất hiện
+ */
+void findName(words *array, int size) {
     
-    for (int i = 0; i < size; i++) {
-        if (wordsArray[i].length == targetLength && *(wordsArray[i].length,wordsArray[i].ptr)==*targetName) {
-            count++;
+    for(uint8_t i=0; i<size;i++){
+        uint8_t count=0;
+        for (uint8_t j = 0; j < size; j++)
+        {
+            uint8_t i_ptr=0;
+            while(array[i].ptr[i_ptr] == array[j].ptr[i_ptr]){
+                i_ptr++;
+                
+                if(array[i].length == i_ptr && array[j].length == i_ptr){
+                    count++;
+                    if (count>=2) array[j].status = false;
+                    else array[j].status = true;
+                    break;
+                }
+            }
         }
+        array[i].quality = count;
     }
-    return count;
 }
 
-int main() {
-    char string[] = "nam hoang bao, nam hoang hoang, bao bao yen, anh bao yen";
-    words *a = splitstring(string, 12);
+/* 
+        @brief In ra danh sách các từ xuất hiện bao nhiêu lần sau khi đã lọc những từ trùng
+ */
+void printName(words *array, int size){
+    for(uint8_t i=0; i<size; i++){
+        if (array[i].status == true)
+        {
+            for (uint8_t j = 0; j < array[i].length; j++)
+            {
+                printf("%c", array[i].ptr[j]);
+            }
+            printf(": %d\n", array[i].quality);
+        }
+        
+    }
+}
 
-    char *targetName = "hoang"; // Tên bạn muốn đếm
-    
-    int nameCount = countName(a, 12, targetName);
+/* 
+        @brief Đảo ngược các từ trong chuỗi
+*/
+void mirrorName(words *string, int size){
+    uint8_t i=size;
+    while (--i)
+    {
+        for (uint8_t j = 0; j < string[i].length; j++)
+        {
+            printf("%c", string[i].ptr[j]);
+        }
+        printf(" ");
 
-    printf("%s %d\n", targetName, nameCount);
+        if(i==1) printf("%.*s", string[0].length, string[0].ptr);
+    }
+}
+
+/* 
+    @brief Hàm so sánh giữa hai từ trong chuỗi
+ */
+bool compare(const char *str1, const char *str2){
+    while (*str1 != ' ' && *str1 != ',')
+    {
+        if(*str1 > *str2) return true;
+        else if(*str1 < *str2) return false;
+
+        str1++;
+        str2++;
+    }
+    return false;
+}
+/* 
+    @brief Sắp xếp các từ trong chuỗi theo thứ tự bảng chữ cái
+ */
+void sortAlphabet(words *array, int size){
+    for (uint8_t i = 0; i < size-1; i++)
+    {
+        words temp = array[i];
+        uint8_t index = i;
+        for (uint8_t j = i+1; j < size; j++)
+        {
+            if (compare(temp.ptr, array[j].ptr))
+            {
+                temp = array[j]; //vd temp = a[7]
+                index = j;
+            }
+        }
+        //swap
+        array[index] = array[i];  //vd a[7] = a[0]
+        array[i] = temp;          // vd a[0] = a[7]
+    }
+
+    for (uint8_t i = 0; i < size; i++)
+    {
+        for (uint8_t j = 0; j < array[i].length; j++)
+        {
+            printf("%c", array[i].ptr[j]);
+        }
+        printf(" ");
+    }
     
-    free(a);
-    return 0;
+    
 }
