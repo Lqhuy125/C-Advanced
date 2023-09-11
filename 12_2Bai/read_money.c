@@ -32,14 +32,13 @@ UNIT unit_for_index(uint8_t index);
 
 int main()
 {
-    char number[] = "100000000100"; 
+    char number[] = "1000000100"; 
 
     uint8_t length = strlen(number);
-
     uint8_t count=0;
+    
     for (uint8_t i = 0; i < length; i++)
     {
-        
         if(number[length-i-1] == '0' && number[length-i-1]==number[length-(i+1)-1])
             count++;
         else break;
@@ -47,21 +46,67 @@ int main()
 
     for (uint8_t i = 0; i < length; i++)
     {
-        if(count == 10 || count == 9 || count ==  8 ){
+        //TH tram ty
+        if((count == 10 || count == 9 || count ==  8) && length%3==0 ){
             print_Number(number, number[i], i, unit_for_index(length - i - 1));
             if(i==2) break;
         }
-        else if(count == 7 || count ==  6 || count == 5){
+        else if((count == 7 || count ==  6 || count == 5) && length%3==0 ){
             print_Number(number, number[i], i, unit_for_index(length - i - 1));
             if(i==5) break;
         }
-        else if(count == 4 || count ==  3 || count == 2){
+        else if((count == 4 || count ==  3 || count == 2) && length%3==0 ){
             print_Number(number, number[i], i, unit_for_index(length - i - 1));
             if(i==8) break;
         }
+        //TH chuc ty
+        else if((count == 9 || count == 8) && length%3==2 ){
+            print_Number(number, number[i], i, unit_for_index(length - i - 1));
+            if(i==1) break;
+        }
+        else if((count == 7 || count == 6 || count == 5) && length%3==2 ){
+            print_Number(number, number[i], i, unit_for_index(length - i - 1));
+            if(i==4) break;
+        }
+        else if((count == 4 || count == 3 || count == 2) && length%3==2 ){
+            print_Number(number, number[i], i, unit_for_index(length - i - 1));
+            if(i==7) break;
+        }
+        //TH ty
+        else if(count == 8 && length%3==1 ){
+            print_Number(number, number[i], i, unit_for_index(length - i - 1));
+            if(i==0) break;
+        }
+        else if((count == 7 || count == 6 || count == 5) && length%3==1 ){
+            print_Number(number, number[i], i, unit_for_index(length - i - 1));
+            if(i==3) break;
+        }
+        else if((count == 4 || count == 3 || count == 2) && length%3==1 ){
+            print_Number(number, number[i], i, unit_for_index(length - i - 1));
+            if(i==6) break;
+        }
         else
             print_Number(number, number[i], i, unit_for_index(length - i - 1));
-        
+
+        //Chua xu ly duoc
+        // while (number[i] != '0' || number[i+1] != '0' || number[i+2] != '0' )
+        // {
+        //     check = true;
+        //     for(uint8_t j=i; j<i+3; j++){
+        //         print_Number(number, number[j], j, unit_for_index(length - j - 1));
+        //     }
+        //     i+=3;
+        //     if(i==12) break;
+        // }
+        // if (check==true)
+        // {
+        //     while (i)
+        //     {
+        //             print_Number(number, number[i], i, unit_for_index(length - i - 1));
+        //         i++;
+        //         if(i==12) break;
+        //     }
+        // }
     }
     printf("dong\n"); 
 }
