@@ -749,3 +749,11 @@ cac mat hang su dung enum de thiet ke
 
 </details>
 
+<details>
+<summary><h3>13. Linked List<h3></summary>
+<ul>
+
+
+
+</details>
+
