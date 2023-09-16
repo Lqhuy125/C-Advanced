@@ -9,7 +9,6 @@ typedef struct Node{
 }Node;
 
 Node *createNode(int value);
-
 int size(Node *head);
 void display(Node *head);
 void front(Node *head);
@@ -30,25 +29,10 @@ int main(int argc, char const *argv[])
     //=> Pointer to pointer
     push_back(&ptr, 7);
     push_back(&ptr, 3);
-    display(ptr);
-    clear(&ptr);
-
     push_back(&ptr, 1);
     push_back(&ptr, 3);
     push_back(&ptr, 8);
     push_back(&ptr, 5);
-    erase(&ptr, 2);
-    display(ptr);
-
-    printf("size of Linked List: %d\n", size(ptr));
-    front(ptr);
-    back(ptr);
-
-    insert(&ptr, 2, 99);
-    display(ptr);
-
-    printf("Linked list after add element at the begin\n");
-    push_front(&ptr, 99);
     display(ptr);
 }
 
@@ -71,7 +55,7 @@ void push_back(Node **ptp, int value){
 /* 
     @brief Create Node new
 
-    Return: address
+    Return: address of node
  */
 Node *createNode(int value){
     Node *ptr = (Node*)malloc(sizeof(Node));

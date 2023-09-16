@@ -753,7 +753,14 @@ cac mat hang su dung enum de thiet ke
 <summary><h3>13. Linked List<h3></summary>
 <ul>
 
+- Phần từ của Linked List là các node: list = {node1, node2, ...}
+- 1 node bao gồm: 
+    + Giá trị của nó (value)
+    + địa chỉ của node tiếp theo (next)
 
+- Node cuối cùng sẽ có địa chỉ next = NULL
+- Địa chỉ của list sẽ là địa chỉ của phần tử đầu tiên
+- Địa chỉ của các phần của Linked List là địa chỉ ngãu nhiên (Không liền kề như địa chỉ của các phần tử array)
 
 </details>
 
