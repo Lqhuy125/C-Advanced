@@ -767,5 +767,11 @@ cac mat hang su dung enum de thiet ke
 <details>
 <summary><h3>14. Queues<h3></summary>
 <ul>
+    -FIFO
+</details>
 
+<details>
+<summary><h3>15. Stacks<h3></summary>
+<ul>
+    - LIFO
 </details>
