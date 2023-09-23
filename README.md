@@ -771,7 +771,13 @@ cac mat hang su dung enum de thiet ke
 </details>
 
 <details>
-<summary><h3>15. Stacks<h3></summary>
+<summary><h3>16. Stacks<h3></summary>
 <ul>
     - LIFO
+</details>
+
+<details>
+<summary><h3>17. BinarySearch<h3></summary>
+<ul>
+    - 
 </details>
