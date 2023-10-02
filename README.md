@@ -781,3 +781,28 @@ cac mat hang su dung enum de thiet ke
 <ul>
     - 
 </details>
+
+<details>
+<summary><h3>19. Class<h3></summary>
+<ul>
+Cấu trúc:
+
+     - tương tự struct
+
+
+Địa chỉ: 
+
+    - Phần tử đầu tiên của class chính lằ địa chỉ của class đó.
+    - Địa chỉ các phần tử tiếp theo cộng dần phụ thuộc vào kích thước của kiếu dữ liệu
+
+Trong class chỉ nên định nghĩa các property và các method, còn nên triển khai ở ngoài
+
+Sử dụng:
+
+    - <kiểu(void/int)><tên_class>::<tên_method(property)>
+
+```c
+int SinhVien::mssv;
+void SinhVien::display()
+```
+</details>
