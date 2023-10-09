@@ -243,61 +243,69 @@ void menu::updateInformationbyID(){
     //Chua check xem co ton tai ID hay khong
     for(SinhVien &it : database){
         if (it.getID() == id){
-            repeat_change:
-            cout<<"choose options:"<<endl;
-            cout<<"press 1 to change name."<<endl;
-            cout<<"press 2 to change sex."<<endl;
-            cout<<"press 3 to change age."<<endl;
-            cout<<"press 4 to change diem Toan"<<endl;
-            cout<<"press 5 to change diem Van"<<endl;
-            cout<<"press 6 to change diem ly"<<endl;
-            cout<<"press 7 to exit update student"<<endl;
-            cout<<"press other number to back!"<<endl;
-            cout<<"enter options:";
             int options;
-            cin>>options;
-            switch (options)
-            {
-            case 1:
-                it.changeName();
-                break;
-            case 2:
-                it.changeGender();
-                break;
-            case 3:
-                it.changeAge();
-                break;
-            case 4:
-                it.changeToan();
-                break;
-            case 5:
-                it.changeVan();
-                break;
-            case 6:
-                it.changeLy();
-                break;
-            case 7:
-                goto exit_update;
-                break;  
-            }
-            if(options > 7 || options < 0){
-                cout<<"Number khong hop le! Hay nhap lai: \n";
-                goto repeat_change;
-            }
+            do{
+                repeat_change:
+                cout<<"choose options:"<<endl;
+                cout<<"press 1 to change name."<<endl;
+                cout<<"press 2 to change sex."<<endl;
+                cout<<"press 3 to change age."<<endl;
+                cout<<"press 4 to change diem Toan"<<endl;
+                cout<<"press 5 to change diem Van"<<endl;
+                cout<<"press 6 to change diem ly"<<endl;
+                cout<<"press 7 to exit update student"<<endl;
+                cout<<"press other number to back!"<<endl;
+                cout<<"enter options:";
+                
+                cin>>options;
+                switch (options)
+                {
+                case 1:
+                    it.changeName();
+                    break;
+                case 2:
+                    it.changeGender();
+                    break;
+                case 3:
+                    it.changeAge();
+                    break;
+                case 4:
+                    it.changeToan();
+                    break;
+                case 5:
+                    it.changeVan();
+                    break;
+                case 6:
+                    it.changeLy();
+                    break;
+                case 7:
+                    goto exit_update;
+                    break;  
+                }
+                if(options > 7 || options < 0){
+                    cout<<"Number khong hop le! Hay nhap lai: \n";
+                }
+                else cout<<"Da sua xong\n";
+            } while(options > 7 || options < 0);
+                
             int temp;
-            cout<<"Da sua xong\n";
-            cout<<"1: Tiep tuc sua them\n0: Quay lai menu\nXin moi nhap: ";
-            flag_temp_change: cin>>temp;
-            if(temp<0 && temp>1){
-                cout<<"Nhap sai! Hay nhap lai: ";
-                goto flag_temp_change;
-            }
-            if(temp == 1) goto repeat_change;
-            else{
-                exit_update: cout<<"Exit update. OK";
-                break;
-            }
+            do{
+                
+                cout<<"1: Tiep tuc sua them\n0: Quay lai menu\nXin moi nhap: ";
+                cin>>temp;
+                if(temp<0 || temp>1){
+                    cout<<"Nhap khong hop le! Hay nhap lai: ";
+                }
+                if(temp == 1) goto repeat_change;
+                else if(temp == 0){
+                    goto exit_update;
+                    break;
+                }
+            } while(temp<0 || temp>1);
         }
+        exit_update:
+            cout<<"Exit update. OK\n";
+            break;
     }
 }
 void menu::displayInformation(){
