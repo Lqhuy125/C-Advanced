@@ -1,6 +1,6 @@
 *.exe
 Test_py
-Test
+test
 .vscode
 Baitap/test.c
 12_2Bai/test.c
