@@ -49,6 +49,7 @@ int main(){
         cout << "Enter latitude: "; cin >> latitude;
         cout << "Enter longitude: "; cin >> longitude;
         pointA.input(latitude,longitude);
+        if (!pointA.isValid(latitude, longitude)) cout << "Wrong value! Enter again: \n";
     } while (!pointA.isValid(latitude, longitude));
 
     do{
@@ -56,8 +57,9 @@ int main(){
         cout << "Enter latitude: "; cin >> latitude;
         cout << "Enter longitude: "; cin >> longitude;
         pointB.input(latitude,longitude);
+        if (!pointB.isValid(latitude, longitude)) cout << "Wrong value! Enter again: \n";
     } while (!pointB.isValid(latitude, longitude));
 
-    cout << "Distance between 2 points is: " << pointA.distanceTo(pointB);
+    cout << "Distance between 2 points is: " << pointA.distanceTo(pointB) << "km";
 
 }
