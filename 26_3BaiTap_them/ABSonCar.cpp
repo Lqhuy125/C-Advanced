@@ -48,12 +48,10 @@ class ABS{
 };
 void ABS::applyBrakes() {
     double wheelSpeed = car.get_Wheel().get_speed();
-    if (wheelSpeed < 10) {
+    if (wheelSpeed < 10) 
         cout << "Warning: wheel is locking up. Adjusting brake force based on car weight:"<< car.get_total_weight() << endl;
-        // Triển khai logic để điều chỉnh lực phanh dựa trên khối lượng của xe ở đây.
-    } else {
+    else
         cout << "Phanh hoat dong binh thuong" << endl;
-    }
 }
 int main(){
     Car car;
