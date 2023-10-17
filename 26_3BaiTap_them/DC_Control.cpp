@@ -26,6 +26,9 @@ class DCMotor
         void set_Direction(Direction direction){
             DIRECTION = direction;
         };
+        Direction get_Direction(){
+            return DIRECTION;
+        }
         double get_max_cur(){
             return MAX_CURRENT;
         }
@@ -65,8 +68,13 @@ class DCMotorController
                 DCMOTOR.Stop();
             }
             else{
+                string dir = "";
                 DCMOTOR.Start();
-                cout << "at " << DCMOTOR.getSpeed() << "RPM" << endl;
+                if (DCMOTOR.get_Direction() == 0)
+                        dir = "CLOCK_WISE";
+                else if(DCMOTOR.get_Direction() == 1)
+                        dir = "COUNTER_CLOCK_WISE";
+                cout << "at " << DCMOTOR.getSpeed() << "RPM and Direction: " << dir << endl;
             }
         };
         void setMotorSpeed(double speed){
@@ -80,10 +88,10 @@ int main()
 {
     DCMotorController motorController(12.0, 1.5);
 
-    motorController.setMotorDirection(CLOCK_WISE);//Set motor quay theo chieu kim dong ho
-    motorController.setMotorSpeed(1000); //set speed of motor 1000 rpm
+    motorController.setMotorDirection(COUNTER_CLOCK_WISE);//Set motor quay theo chieu kim dong ho
+    motorController.setMotorSpeed(1200); //set speed of motor 1000 rpm
 
-    double currentFeedback = 1.4;
+    double currentFeedback = 1.6; // >1.5 overload
     double temperatureFeedback = 7;
 
     motorController.controlMotor(currentFeedback, temperatureFeedback);
