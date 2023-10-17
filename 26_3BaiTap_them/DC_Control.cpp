@@ -16,7 +16,7 @@ class DCMotor
         Direction DIRECTION;
         bool isRunning;
     public:
-        DCMotor(double vol, double max_cur);
+        DCMotor(double vol, double max_cur) : VOLTAGE(vol), MAX_CURRENT(max_cur) {};
         void set_Speed(double speed){
             SPEED  = speed;
         };
@@ -26,6 +26,9 @@ class DCMotor
         void set_Direction(Direction direction){
             DIRECTION = direction;
         };
+        double get_max_cur(){
+            return MAX_CURRENT;
+        }
         void Start(){
             isRunning = true;
             cout << "Motor started ";
@@ -36,20 +39,16 @@ class DCMotor
         };
 };
 
-class FeedbackSystem
-{
+class FeedbackSystem{
     private:
-
-        DCMotor dcmotor;
-        double CURRENT_FEEDBACK;
-        double TEMPERATURE_FEEDBACK;
+        DCMotor &dcmotor;
     public:
-        FeedbackSystem(/* args */);
-        bool overloadDetected(){
-            return CURRENT_FEEDBACK > 1.5;
+        FeedbackSystem(DCMotor& motor) : dcmotor(motor) {};
+        bool overloadDetected(double cur){
+            return cur > dcmotor.get_max_cur();
         };
-        bool overheatDetected(){
-            return TEMPERATURE_FEEDBACK > 7.5;
+        bool overheatDetected(double heat){
+            return heat > 70;
         };
 };
 
@@ -59,34 +58,33 @@ class DCMotorController
         DCMotor DCMOTOR;
         FeedbackSystem FEEDBACKSYSTEM; 
     public:
-        DCMotorController(double voltage, double maxcurrent) : DCMOTOR(voltage, maxcurrent) {};
+        DCMotorController(double voltage, double maxcurrent) : DCMOTOR(voltage, maxcurrent), FEEDBACKSYSTEM(DCMOTOR) {};
         void controlMotor(double CurrentFeedback, double TemperatureFeedback){
-            if(CurrentFeedback > DCMOTOR.MAX_CURRENT || TemperatureFeedback > 8.0){
+            if(FEEDBACKSYSTEM.overloadDetected(CurrentFeedback) || FEEDBACKSYSTEM.overheatDetected(TemperatureFeedback)){
+                cout << "Issue detected. ";
                 DCMOTOR.Stop();
-                cout << "Issue detected.\n";
             }
             else{
                 DCMOTOR.Start();
-                cout << "at " << DCMOTOR.getSpeed();
+                cout << "at " << DCMOTOR.getSpeed() << "RPM" << endl;
             }
         };
-        void setMotorDirection(Direction direction){
-            
-        };
         void setMotorSpeed(double speed){
-
+            DCMOTOR.set_Speed(speed);
+        };
+        void setMotorDirection(Direction dir){
+            DCMOTOR.set_Direction(dir);
         };
 };
-
-int main(int argc, char const *argv[])
+int main()
 {
-    DCMotorController motorController(12.0, 5.0);
+    DCMotorController motorController(12.0, 1.5);
 
     motorController.setMotorDirection(CLOCK_WISE);//Set motor quay theo chieu kim dong ho
     motorController.setMotorSpeed(1000); //set speed of motor 1000 rpm
 
-    double currentFeedback = 1.6;
-    double temperatureFeedback = 7.5;
+    double currentFeedback = 1.4;
+    double temperatureFeedback = 7;
 
     motorController.controlMotor(currentFeedback, temperatureFeedback);
 
