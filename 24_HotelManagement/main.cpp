@@ -741,9 +741,9 @@ void Delete_Employee(vector<Employee>& databaseEmployee){
     while (1){
         system("cls");
         cout << "Ban co chac chan khong?\n";
-        cout << "________________________\n";
+        cout << "\n";
         cout << "1: Co\n          2: Khong\n";
-        cout << "________________________\n";
+        cout << "\n";
         cout << "Nhap lua chon: ";
         cin >> key;
         switch (key)
@@ -751,13 +751,13 @@ void Delete_Employee(vector<Employee>& databaseEmployee){
         case 1:
             databaseEmployee.erase(databaseEmployee.begin() + i);
             system("cls");
-            cout << "          __________Xoa thanh cong___________\n";
+            cout << "Xoa thanh cong\n";
             while (1){
-                cout << "          ________________________\n";
-                cout << "          1: Tiep tuc xoa\n";
-                cout << "          0: Quay lai\n\n";
-                cout << "          ________________________\n";
-                cout << "          Nhap lua chon: ";
+                cout << "\n";
+                cout << "1: Tiep tuc xoa\n";
+                cout << "0: Quay lai\n\n";
+                cout << "\n";
+                cout << "Nhap lua chon: ";
                 cin >> key;
                 switch (key)
                 {
