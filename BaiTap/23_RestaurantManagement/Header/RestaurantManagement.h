@@ -54,7 +54,7 @@ class Manager{
         Manager();
         list <Dish> DATABASE_DISH; ////Nen o private
         
-        void setNumberOfTable();
+        void setNumberOfTable(list<Table> & listofTable);
         int getNumberofTable();
         list <Dish> getDatabaseDish();
         void addDish();

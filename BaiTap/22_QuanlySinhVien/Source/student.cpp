@@ -1,72 +1,6 @@
-/* 
-    1. Thêm mới sinh viên
-    2. Cập nhật thông tin sinh viên
-    3. Xoá sinh viên bằng ID
-    4. Tìm kiếm sinh viên theo tên ( Nhập tên in ra các thong tin của đối tượng)
-    5. Sắp xếp sinh viên theo điểm trung bình
-    6. Sắp xếp sinh viên theo tên
-    7. Hiển thị danh sách sinh viên
- */
-#include <iostream>
-#include <vector>
-#include <list>
-#include <string>
 
-using namespace std;
+#include <student.h>
 
-typedef enum{
-    NU,
-    NAM
-} typeGioiTinh;
-
-typedef enum{
-    GIOI,
-    KHA,
-    TRUNGBINH,
-    YEU
-} typeHocLuc;
-
-class SinhVien{
-    private:
-        int ID;
-        string NAME;
-        int TUOI;
-        typeGioiTinh GIOITINH;
-        typeHocLuc HOCLUC;
-        float DIEMTB;
-        double DIEMLY, DIEMTOAN, DIEMVAN;
-    public:
-        SinhVien(string name, int tuoi, typeGioiTinh gioitinh, float diemLy, float diemToan, float diemVan);
-        double getDiemTB() {
-             DIEMTB = (DIEMLY+DIEMTOAN+DIEMVAN)/3; 
-             return DIEMTB; 
-        }
-        typeHocLuc getHocLuc(){
-            //DIEMTB = (DIEMLY+DIEMTOAN+DIEMVAN)/3;
-            if(DIEMTB >= 8) HOCLUC = GIOI;
-            else if (DIEMTB >= 6.5) HOCLUC = KHA;
-            else if(DIEMTB >= 5) HOCLUC = TRUNGBINH;
-            else HOCLUC = YEU;
-            return HOCLUC;
-        };
-
-        int getID() {return ID;};
-        string getName() {return NAME;};
-        int getTuoi()  {return TUOI;};
-        typeGioiTinh getGioiTinh() {return GIOITINH;};
-        float getDiemToan() {return DIEMTOAN;};
-        float getDiemLy() {return DIEMLY;};
-        float getDiemVan() {return DIEMVAN;};
-
-        void information();
-
-        void changeName();
-        void changeGender();
-        void changeAge();
-        void changeToan();
-        void changeVan();
-        void changeLy();
-};
 void SinhVien::changeName(){
     string new_name;
     cout<<"Enter new name: ";
@@ -158,18 +92,6 @@ SinhVien::SinhVien(string name, int tuoi, typeGioiTinh gioitinh, float ly, float
     DIEMVAN = Van;
 }
 
-class menu{
-    public:
-        list<SinhVien> database;
-
-        void addSinhVien();
-        void displayInformation();
-        void updateInformationbyID();
-        void deleteStudentbyID();
-        void findStudentbyName();
-        void sortStudentbyGPA();
-        void sortStudentbyName();
-};
 void menu::sortStudentbyGPA(){
     list<SinhVien>::iterator it1, it2;
 
@@ -243,69 +165,61 @@ void menu::updateInformationbyID(){
     //Chua check xem co ton tai ID hay khong
     for(SinhVien &it : database){
         if (it.getID() == id){
+            repeat_change:
+            cout<<"choose options:"<<endl;
+            cout<<"press 1 to change name."<<endl;
+            cout<<"press 2 to change sex."<<endl;
+            cout<<"press 3 to change age."<<endl;
+            cout<<"press 4 to change diem Toan"<<endl;
+            cout<<"press 5 to change diem Van"<<endl;
+            cout<<"press 6 to change diem ly"<<endl;
+            cout<<"press 7 to exit update student"<<endl;
+            cout<<"press other number to back!"<<endl;
+            cout<<"enter options:";
             int options;
-            do{
-                repeat_change:
-                cout<<"choose options:"<<endl;
-                cout<<"press 1 to change name."<<endl;
-                cout<<"press 2 to change sex."<<endl;
-                cout<<"press 3 to change age."<<endl;
-                cout<<"press 4 to change diem Toan"<<endl;
-                cout<<"press 5 to change diem Van"<<endl;
-                cout<<"press 6 to change diem ly"<<endl;
-                cout<<"press 7 to exit update student"<<endl;
-                cout<<"press other number to back!"<<endl;
-                cout<<"enter options:";
-                
-                cin>>options;
-                switch (options)
-                {
-                case 1:
-                    it.changeName();
-                    break;
-                case 2:
-                    it.changeGender();
-                    break;
-                case 3:
-                    it.changeAge();
-                    break;
-                case 4:
-                    it.changeToan();
-                    break;
-                case 5:
-                    it.changeVan();
-                    break;
-                case 6:
-                    it.changeLy();
-                    break;
-                case 7:
-                    goto exit_update;
-                    break;  
-                }
-                if(options > 7 || options < 0){
-                    cout<<"Number khong hop le! Hay nhap lai: \n";
-                }
-                else cout<<"Da sua xong\n";
-            } while(options > 7 || options < 0);
-                
+            cin>>options;
+            switch (options)
+            {
+            case 1:
+                it.changeName();
+                break;
+            case 2:
+                it.changeGender();
+                break;
+            case 3:
+                it.changeAge();
+                break;
+            case 4:
+                it.changeToan();
+                break;
+            case 5:
+                it.changeVan();
+                break;
+            case 6:
+                it.changeLy();
+                break;
+            case 7:
+                goto exit_update;
+                break;  
+            }
+            if(options > 7 || options < 0){
+                cout<<"Number khong hop le! Hay nhap lai: \n";
+                goto repeat_change;
+            }
             int temp;
-            do{
-                
-                cout<<"1: Tiep tuc sua them\n0: Quay lai menu\nXin moi nhap: ";
-                cin>>temp;
-                if(temp<0 || temp>1){
-                    cout<<"Nhap khong hop le! Hay nhap lai: ";
-                }
-                if(temp == 1) goto repeat_change;
-                else if(temp == 0){
-                    goto exit_update;
-                    break;
-                }
-            } while(temp<0 || temp>1);
+            cout<<"Da sua xong\n";
+            cout<<"1: Tiep tuc sua them\n0: Quay lai menu\nXin moi nhap: ";
+            flag_temp_change: cin>>temp;
+            if(temp<0 && temp>1){
+                cout<<"Nhap sai! Hay nhap lai: ";
+                goto flag_temp_change;
+            }
+            if(temp == 1) goto repeat_change;
+            else{
+                exit_update: cout<<"Exit update. OK";
+                break;
+            }
         }
-        exit_update:
-            cout<<"Exit update. OK\n";
-            break;
     }
 }
 void menu::displayInformation(){
@@ -377,62 +291,4 @@ void menu::addSinhVien(){
             if(temp == 1) goto repeat_add;
             else break;
     }
-}
-int main()
-{
-    SinhVien sv1 = SinhVien("Quang", 21, NAM, 9, 7, 8); 
-    SinhVien sv2 = SinhVien("Cuong", 22, NAM, 6, 7, 8); 
-    SinhVien sv3 = SinhVien("Lan", 19, NU, 10,9,10); 
-
-    menu menu;
-    menu.database.push_back(sv1);
-    menu.database.push_back(sv2);
-    menu.database.push_back(sv3);
-    while(1){
-        int options;
-        cout<<"*******************************************************"<<endl;
-        cout<<"choose options!"<<endl;
-        cout<<"press 1 to add a new student"<<endl;
-        cout<<"press 2 to update student's information by ID"<<endl;
-        cout<<"press 3 to delete student by ID"<<endl;
-        cout<<"press 4 to find student by name"<<endl;
-        cout<<"press 5 to sort students by GPA"<<endl;
-        cout<<"press 6 to sort students by name"<<endl;
-        cout<<"press 7 to display students list"<<endl;
-        cout<<"press 8 to exit"<<endl;
-        cout<<"enter options: ";
-        cin>>options;
-
-        switch (options)
-        {
-        case 1:
-            menu.addSinhVien();
-            break;
-        case 2:
-            menu.updateInformationbyID();
-            break;
-        case 3:
-            menu.deleteStudentbyID();
-            break;
-        case 4:
-            menu.findStudentbyName();
-            break;
-        case 5:
-            menu.sortStudentbyGPA();
-            break;
-        case 6:
-            menu.sortStudentbyName();
-            break;    
-        case 7:
-            menu.displayInformation();
-            break;
-        case 8:
-            goto exit_while;
-            break;
-        default:
-            break;
-        }
-    }
-    exit_while: cout << "Exit. Oke" << endl;
-    return 0;
 }

@@ -85,17 +85,15 @@ void Table :: addDish_table(){
         cout << "Dish with ID " << ID << " not found.\n";
     }
 }
-// void Table :: listDish_table(){
-//     cout<<"Tabble number: "<<getNumberTable()<<endl;
-//     for(typeDish item : DISH_IN_TABLE){
-//         item.dish.getInformation();
-//         cout<<"number_of_dishes: "<<item.number_of_dishes<<endl;
-//     }
-
-// }
+void Table :: listDish_table(){
+    cout<<"Tabble number: "<<getNumberTable()<<endl;
+    for(typeDish item : DISH_IN_TABLE){
+        item.dish.getInformation();
+        cout<<"number_of_dishes: "<<item.number_of_dishes<<endl;
+    }
+}
 //=====================================================MANAGER==========================================
 Manager::Manager(){
-    
 }
 /*  
     Method: menuManagement
@@ -146,42 +144,17 @@ void Manager::menuManager(){
         number_of_table: number of table
     Output: none
 */
-int number_of_table=0;
-void Manager::setNumberOfTable(){
-    
-    // do{
-    //     int key;
-    //     cout<<"---------------------------------------------------------"<<endl;
-    //     cout<<"Press 1 to set number of table"<<endl;
-    //     cout<<"Press 2 to get number of table"<<endl;
-    //     cout<<"Press 0 to back"<<endl;
-    //     cout<<"Enter options: ";
-
-    //     do{
-    //         cin>>key;
-    //         if(key>2 || key<0) cout<<"Invalid choice! Please re-enter: ";
-    //     } while (key>2 || key<0);
-
-
-    //     if(key==1){
-    //         cout<<"Set number of table for restaurant: ";
-    //         cin>>number_of_table;
-    //         NUMBER_OF_TABLES = number_of_table;
-    //         cout<<"Successfully enter!\n";
-    //         goto a;
-    //         //return;
-    //     }
-    //     if(key==0){
-    //         return;
-    //     }
-    //     if(key==2){
-    //         cout << "Number of table: " << getNumberofTable() <<endl;
-    //         return;
-    //     }
-    //     a: break;
-    // } while(1);
+// int number_of_table=0;
+void Manager::setNumberOfTable(list<Table> & listofTable){
     cout<<"Enter the number of table: ";
     cin>>NUMBER_OF_TABLES;
+    for (int i = 1; i <= NUMBER_OF_TABLES; i++)
+    {
+        Table x(i+1);
+        listofTable.push_back(x);
+    }
+    //in thong tin bàn
+    cout<<"Successful change!"<<endl<<endl;
     cout<<"*****************************************"<<endl;
 }
 int Manager::getNumberofTable()
@@ -371,21 +344,21 @@ void Manager :: listDish_manager(){
     }
 }
 //=====================================================STAFF==========================================
-// Staff::Staff(int number_of_table , list<Dish>database_dish){
+Staff::Staff(int number_of_table , list<Dish>database_dish){
     
-//     if(number_of_table == 0 && database_dish.size() == 0){
-//         cout << "Staff do not have information, please transfer data to management! \n";
-//     }
-//     // add table
-//     else{
-//         for(int i=1; i<=number_of_table; i++){
-//         Table Table(i, false, database_dish);
-//         DATABASE_TABLE.push_back(Table);
-//     }
-//     // coppy list dish from class Manager
-//     DATABASE_DISH.assign(database_dish.begin(), database_dish.end());
-//     }
-// }
+    if(number_of_table == 0 && database_dish.size() == 0){
+        cout << "Staff do not have information, please transfer data to management! \n";
+    }
+    // add table
+    else{
+        for(int i=1; i<=number_of_table; i++){
+        Table Table(i, false, database_dish);
+        DATABASE_TABLE.push_back(Table);
+    }
+    // coppy list dish from class Manager
+    DATABASE_DISH.assign(database_dish.begin(), database_dish.end());
+    }
+}
 void Staff :: listDish_staff(){
     cout<<"=======================================\n";
     cout<<"STT\t"<<"ID\t"<<"Name\t"<<"Price\n";
@@ -445,19 +418,19 @@ void Staff::menuStaff(){
 
                     switch(options){
                     case 1:
-                        //table.addDish_table();
+                        table.addDish_table();
                         break;
                     case 2:
-                        
+                        table.updateDish_table();
                         break;
                     case 3:
-                        
+                        table.deleteDish_table()
                         break;
                     case 4:
-                        
+                        table.listDish_table();
                         break;
                     case 5:
-                        
+                        table.billPayment_table();
                         break;
                     case 0:
                         //cout<<getNumberofTable()<<endl;
