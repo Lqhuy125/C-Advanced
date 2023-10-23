@@ -75,8 +75,6 @@ class ParkingLot{
         int checkAvailableSlots();
         bool updateSlotStatus(int slot_index, bool status);
         int getTotalSlots();
-
-        //Kiemtra vi tri đỗ
         
 };
 int ParkingLot::checkAvailableSlots(){

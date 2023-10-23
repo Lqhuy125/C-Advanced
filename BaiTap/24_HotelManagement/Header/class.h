@@ -1,3 +1,5 @@
+#ifndef __class
+#define __class
 #include <iostream>
 #include <vector>
 #include <iomanip>
@@ -175,3 +177,4 @@ class EmployeeManagement{
 // void UserManagement::set_PassWordManagement(string pass){
 //     user.set_Password(pass);
 // }
+#endif
