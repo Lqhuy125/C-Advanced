@@ -124,41 +124,41 @@ class EmployeeManagement{
         void update_employee();
 };
 
-// class User{
-//     private:
-//         int ID;
-//         string USENAME;
-//         string PASSWORD;
-//     public:
-//         User(int id, string username, string password);
-//         void set_Usename(string name);
-//         void set_Password(string pass);
-//         void set_ID(int id);
+class User{
+    private:
+        int ID;
+        string USENAME;
+        string PASSWORD;
+    public:
+        User(string username = " ", string password = " ");
+        void set_Usename(string name);
+        void set_Password(string pass);
+        void set_ID(int id);
 
-//         int get_ID();
-//         string get_Usename();
-//         string get_Password();
+        int get_ID();
+        string get_Usename();
+        string get_Password();
 
-//         bool authenticate(string inputUsename, string inputPassword);
-// };
-// void User::set_Usename(string name){
-//     USENAME = name;
-// }
-// void User::set_Password(string pass){
-//     PASSWORD = pass;
-// }
-// void User::set_ID(int id){
-//     ID = id;
-// }
-// int User::get_ID() { return ID; }
-// string User::get_Usename(){ return USENAME; }
-// string User::get_Password() { return PASSWORD; }
+        bool authenticate(string inputUsename, string inputPassword);
+};
 
-// bool User::authenticate(string inputUsename, string inputPassword){
-//     bool checkSignUp = (inputUsename == USENAME && inputPassword == PASSWORD);
-//     return checkSignUp;
-// }
-
+// Manage security.
+class SecureManagement{
+    private:
+        User user_Admin;
+        vector<User> data_User;      
+    public:
+        SecureManagement(){
+            user_Admin.set_Username("admin");
+            user_Admin.set_Password("admin");
+        }
+        void add_User(int id_user, string input_username, string input_password);
+        void remove_User(int id_user);
+        void change_Password_User(string input_username, string new_password);
+        void edit_Pass_Addmin(string new_pass);
+        bool get_Check_Signup_Admin(string input_username, string input_password);
+        vector<User> & get_database_User();
+};
 // class UserManagement{
 //     private:
 //         User user;
@@ -177,4 +177,17 @@ class EmployeeManagement{
 // void UserManagement::set_PassWordManagement(string pass){
 //     user.set_Password(pass);
 // }
+
+class Feedback_info{
+    private:
+        string name_customer;
+        string feedback;
+        double rate;
+    public:
+        Feedback_info(string name, string review, double mark){
+            name_customer = name;
+            feedback = review;
+            rate = mark;
+        } 
+};
 #endif

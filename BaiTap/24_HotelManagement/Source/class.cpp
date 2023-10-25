@@ -69,3 +69,21 @@ void Employee::set_Position(JobPosition position){
 void Employee::set_Schedule(Schedule schedule){
     SCHEDULE = schedule;
 }
+
+void User::set_Usename(string name){
+    USENAME = name;
+}
+void User::set_Password(string pass){
+    PASSWORD = pass;
+}
+void User::set_ID(int id){
+    ID = id;
+}
+int User::get_ID() { return ID; }
+string User::get_Usename(){ return USENAME; }
+string User::get_Password() { return PASSWORD; }
+
+bool User::authenticate(string inputUsename, string inputPassword){
+    bool checkSignUp = (inputUsename == USENAME && inputPassword == PASSWORD);
+    return checkSignUp;
+}

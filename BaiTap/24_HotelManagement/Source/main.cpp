@@ -1,12 +1,17 @@
 #include <book_room.h>
 #include <customer_management.h>
 #include <Employee_Management.h>
+#include <feed_back.h>
+#include <Security_access.h>
+
 
 int main(int argc, char const *argv[])
 {
     vector<Room> DATABASE_ROOM;
     CustomerManagement CustomerManagement;
     vector<Employee> databaseEmployee;
+
+    vector<Feedback_info> listof_Feedback;
     
     int option=0;
     while(1){
@@ -37,6 +42,9 @@ int main(int argc, char const *argv[])
                 break;
             case 5:
                 
+                break;
+            case 7:
+                Feedback(listof_Feedback);
                 break;
             case 0:
                 cout << "======Good bye======";
