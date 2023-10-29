@@ -32,7 +32,7 @@ int main(int argc, char const *argv[])
     // cout << "Total slot: " << parkingLot.getTotalSlots() << endl;
     // cout << "So slot con trong: " << parkingLot.checkAvailableSlots() << endl;
     //Gia su update vi tri 1,0 va 1,1
-    parkingLot.updateSlotStatus(Position(1,0), false);
+    parkingLot.updateSlotStatus(Position(1,0), true);
     parkingLot.updateSlotStatus(Position(1,1), true);
     // cout << "So slot con trong: " << parkingLot.checkAvailableSlots() << endl;
     //=================================================Test Vehicle=====================================
@@ -71,9 +71,9 @@ int main(int argc, char const *argv[])
         navigationSystem.getmap();
 
         //huong dan duong di
-        cout << " direction to the packing location " << endl;
+        cout << "Direction to the packing location " << endl;
         navigationSystem.guideMovement(*suitableSlot);
-        cout << " Distance away: " << navigationSystem.getMoveDistance(parkingLot.getDistance()) << "(m)" << endl;
+        cout << "Distance away: " << navigationSystem.getMoveDistance(parkingLot.getDistance()) << "(m)" << endl;
     }
     else{
         cout << "Khong tim thay vi tri phu hop\n";

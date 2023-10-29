@@ -66,7 +66,6 @@ void NavigationSystem::guideMovement(ParkingSlot& destination) {
     targetPos.x = targetPosx;
     targetPos.y = targetPosy;
 
-    vector<string> directions;
     int currentX = currentPos.x;
     int currentY = currentPos.y;
     cout << "Begin pos: " << currentPos.x << " " << currentPos.y << endl;
