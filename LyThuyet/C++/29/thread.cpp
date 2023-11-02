@@ -17,7 +17,9 @@ void TASK2(){
     while (1)
     {
         this_thread::sleep_for(chrono::seconds(3)); // Lam cho chuong trinh delay 1s
+        
         cout << "task2 = " << i++ << endl;
+        cout << "-----------------\n";
     }
 }
 int main(int argc, char const *argv[])

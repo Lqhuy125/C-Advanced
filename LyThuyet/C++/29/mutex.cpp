@@ -29,7 +29,6 @@ void napTien(int soTien){
     //khi duoc goi lenh nay voi bien taiKhoanMutex toan cuc 
     //thi chi co the su dung 1 trong 2 khi lenh nay duoc viet
 
-
     taiKhoan += soTien;
 
     cout << "Tai khoan: " << soTien << endl;
@@ -45,7 +44,7 @@ void rutTien(int soTien){
 }
 int main(int argc, char const *argv[])
 {
-    thread t1(napTien, 20); // co bao nhieu param thi truyen bay nhieu vao
+    thread t1(napTien, 20); // co bao nhieu parameter thi truyen bay nhieu vao
     thread t2(rutTien, 20);
 
     t1.join();
