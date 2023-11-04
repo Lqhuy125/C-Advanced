@@ -1,11 +1,9 @@
 *.exe
 Test_py
-test
 .vscode
-Baitap/test.c
-12_2Bai/test.c
 Thi
 13_Linked_List/test.c
 14_Queues/test.c
 Baitap/test27
-Baitap/Mobile_Banking
+test.c
+*.txt
