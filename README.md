@@ -518,7 +518,7 @@ return 0;
 <summary><h3>5. Phân vùng nhớ<h3></summary>
 
 **Phân vùng trong RAM:**
-![alt text](https://github.com/Lqhuy125/C-Advanced/blob/master/5_Phan_Vung_Nho/Phanvungnho.png)
+![alt text](https://github.com/Lqhuy125/C-Advanced/blob/master/LyThuyet/C/5_Phan_Vung_Nho/Phanvungnho.png)
 
 <ul>
 <details>
